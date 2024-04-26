@@ -1,9 +1,10 @@
 import KanvasCore, { genericAuthMiddleware } from "@kanvas/core";
 import { GRAPHQL_API_URL, API_KEY } from "../constants/api";
+import { TOKEN_USER_KEY } from "../constants/tokenKey";
 
 // Function to retrieve the authentication token from cookies
 const getKey = async (): Promise<string | null> => {
-  return localStorage.getItem("token") || null; // wherever you have saved the user token
+  return localStorage.getItem(TOKEN_USER_KEY) || null; 
 };
 
 // Initialize Kanvas Core

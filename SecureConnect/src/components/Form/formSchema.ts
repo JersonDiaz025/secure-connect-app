@@ -14,6 +14,7 @@ export const validationSchema = yup.object({
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("Confirm password is required"),
 });
+// Initial values form defined
 export const initialValues: AuthData = {
   email: "",
   firstName: "",

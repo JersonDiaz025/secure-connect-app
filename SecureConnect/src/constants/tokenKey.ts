@@ -1,1 +1,2 @@
-export const TOKEN_USER_KEY = "tokenUser"
+// Key for save data user in local storage
+export const TOKEN_USER_KEY = "tokenUser";

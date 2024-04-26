@@ -4,7 +4,7 @@ import userStore from "../../store/user";
 
 const Header = () => {
   const { handleLogout } = AuthForm();
-  const nameUser = userStore((state) => state.nameUser);
+  const nameUser: string = userStore((state) => state.nameUser);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Header = () => {
           </div>
           <div className="flex items-center flex-wrap justify-end">
             <div className="flex gap-2">
-              <span className="text-white font-extralight">Hello,</span>
+              <Title title="Hello," styles="text-white font-extralight" />
               <h4 className="text-white font-semibold mr-4">
                 {nameUser ? nameUser : ""}
               </h4>

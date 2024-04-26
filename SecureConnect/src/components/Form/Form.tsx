@@ -29,6 +29,7 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
   //Handling the case of context-dependent user action functions
   const submitHandler = isLogin ? handleLoginSubmit : handleRegisterSubmit;
 
+  // Formik method config
   const formik = useFormik<AuthData>({
     initialValues,
     validationSchema: validationSchema,
@@ -39,7 +40,6 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
     <form className="flex flex-col" onSubmit={formik.handleSubmit}>
       <input
         id={idFieldEmail}
-        name="email"
         value={formik.values.email}
         placeholder={placeholderEmail}
         onChange={formik.handleChange}
@@ -52,7 +52,6 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
       )}
       <input
         id={idFieldFirstname}
-        name="firstName"
         value={formik.values.firstName}
         placeholder={placeholderFirstName}
         onChange={formik.handleChange}
@@ -65,7 +64,6 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
       )}
       <input
         id={idFieldPass}
-        name="password"
         value={formik.values.password}
         placeholder={placeholderPass}
         onChange={formik.handleChange}
@@ -78,7 +76,6 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
       )}
       <input
         id={idFieldConfirmPass}
-        name="confirmPass"
         value={formik.values.confirmPass}
         placeholder={placeholderConfirmPass}
         onChange={formik.handleChange}

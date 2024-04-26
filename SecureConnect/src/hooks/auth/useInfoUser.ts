@@ -3,7 +3,7 @@ import { getAuthToken } from "../../utils/tokenHelper";
 
 //Hook to verify auth user in app and set name user
 const useCheckAuth = () => {
-  const isAuthenticated = userStore((state) => state.isAuthenticated);
+  const isAuthenticated: boolean = userStore((state) => state.isAuthenticated);
   const setIsAuthenticated = userStore((state) => state.setIsAuthenticated);
   const setNameUser = userStore((state) => state.setNameUser);
 
