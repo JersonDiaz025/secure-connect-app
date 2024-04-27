@@ -1,48 +1,64 @@
 import { AuthData } from "../../interfaces/AuthData";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { LOGIN_MUTATION } from "../../graphql/mutations/login.mutation";
-import { REGISTER_MUTATION } from "../../graphql/mutations/register.mutation";
 import { TOKEN_USER_KEY } from "../../constants/tokenKey";
 import userStore from "../../store/user";
 import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
 import { SetIsAuthenticated, DataUser } from "../../types/user";
 import { toast } from "react-toastify";
 import { AppRoutes } from "../../constants/routes";
+import { client } from "../../services/kanvasService";
 
-const AuthForm = () => {
-  const [register] = useMutation(REGISTER_MUTATION);
-  const [login] = useMutation(LOGIN_MUTATION);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+/**
+ * Authentication form component.
+ * Handles user registration, login, and logout.
+ * @returns Functions for handling registration, login, and logout.
+ */
+const useAuthForm = () => {
   const setIsAuthenticated = userStore(
     (state) => state.setIsAuthenticated
   ) as SetIsAuthenticated;
   const navigate = useNavigate();
 
+  /**
+   * Handles registration form submission.
+   * @param values - Registration form values.
+   */
   const handleRegisterSubmit = async (values: AuthData) => {
+    const { email, firstName, password, confirmPass } = values;
     try {
-      const { data } = await register({
-        variables: {
-          data: {
-            email: values.email,
-            firstname: values.firstName,
-            password: values.password,
-            password_confirmation: values.confirmPass,
-          },
-        },
+      const dataUser = await client.users.register({
+        email,
+        firstname: firstName,
+        password,
+        password_confirmation: confirmPass,
       });
+      // Check if registration was successful
+      if (
+        dataUser &&
+        dataUser.register &&
+        dataUser.register.token &&
+        dataUser.register.user
+      ) {
+        const token = dataUser.register.token.token;
+        const displayname = dataUser.register.user.displayname;
 
-      toast.success(`Hola ${data.firstName} has logrado un registro exitoso!`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-
-      });
+        if (displayname && token) {
+          toast.success(
+            `Hello ${displayname} you have successfully logged in.!`,
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+          navigate(AppRoutes.LOGIN);
+        }
+      }
     } catch (error) {
       const errorMsg: string | unknown = (error as Error).message;
       toast.error(`${errorMsg}`, {
@@ -58,21 +74,19 @@ const AuthForm = () => {
     }
   };
 
+  /**
+   * Handles login form submission.
+   * @param values - Login form values.
+   */
   const handleLoginSubmit = async (values: AuthData) => {
+    const { email, password } = values;
     try {
-      const { data } = await login({
-        variables: {
-          data: {
-            email: values.email,
-            password: values.password,
-          },
-        },
-      });
-      if (data && data.login) {
+      const user = await client.auth.login(email, password);
+      if (user && user.token) {
         const dataUser: DataUser = {
           name: values.firstName,
           email: values.email,
-          token: data.login.token,
+          token: user.token,
         };
         saveAuthToken(dataUser);
         const infoUser = getAuthToken();
@@ -82,7 +96,7 @@ const AuthForm = () => {
           setIsAuthenticated(parserInfo.token);
         }
       }
-      toast.success("Inicio de sesión exitoso", {
+      toast.success("Successful login", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: true,
@@ -107,6 +121,9 @@ const AuthForm = () => {
     }
   };
 
+  /**
+   * Handles logout action.
+   */
   const handleLogout = () => {
     localStorage.removeItem(TOKEN_USER_KEY);
     setIsAuthenticated(false);
@@ -116,4 +133,4 @@ const AuthForm = () => {
   return { handleRegisterSubmit, handleLoginSubmit, handleLogout };
 };
 
-export default AuthForm;
+export default useAuthForm;

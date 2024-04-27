@@ -3,7 +3,7 @@ import { FormItems } from "../../types/FormItems";
 import { validationSchema, initialValues } from "./formSchema";
 import { useFormik } from "formik";
 import { AuthData } from "../../interfaces/AuthData";
-import AuthForm from "../../hooks/auth/useAuth";
+import useAuthForm from "../../hooks/auth/useAuth";
 
 const Form = (props: FormItems & { isLogin?: boolean }) => {
   const {
@@ -25,7 +25,7 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
     isLogin,
   } = props;
 
-  const { handleRegisterSubmit, handleLoginSubmit } = AuthForm();
+  const { handleRegisterSubmit, handleLoginSubmit } = useAuthForm();
   //Handling the case of context-dependent user action functions
   const submitHandler = isLogin ? handleLoginSubmit : handleRegisterSubmit;
 

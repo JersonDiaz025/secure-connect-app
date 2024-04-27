@@ -1,8 +1,14 @@
 export interface AuthData {
   email: string;
-  firstName?: string;
+  firstName?: string | undefined;
   password: string;
   confirmPass: string;
+}
+
+export interface UserData {
+  id: string;
+  firstname: string;
+  email: string;
 }
 
 export interface UseAuthHook {

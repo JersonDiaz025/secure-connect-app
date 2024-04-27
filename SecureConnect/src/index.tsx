@@ -1,9 +1,7 @@
 import "./index.css";
 import React from "react";
-import App from "./router/App";
+import App from "./router/AppRouter";
 import ReactDOM from "react-dom/client";
-import { ApolloProvider } from "@apollo/client";
-import apolloClient from "./graphql/config/apolloClient";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,9 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <App />
-      <ToastContainer />
-    </ApolloProvider>
+    <App />
+    <ToastContainer />
   </React.StrictMode>
 );
