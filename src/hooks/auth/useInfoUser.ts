@@ -11,7 +11,8 @@ const useCheckAuth = () => {
   if (infoUser !== null) {
     const parserInfo = JSON.parse(infoUser);
     setNameUser(parserInfo.name);
-    setIsAuthenticated(true);
+    console.log(parserInfo);
+    setIsAuthenticated(parserInfo.token ? true : false);
   }
 
   return { isAuthenticated };
