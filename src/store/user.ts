@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { UserState } from "../interfaces/UserInfo";
 
 // Store for managing user authentication state and user information.
@@ -12,7 +12,7 @@ const userStore = create<UserState>((set) => {
 
     //Function to set the authentication state of the user.
     setIsAuthenticated: (value: boolean) => set({ isAuthenticated: value }),
-  
+
     //Function to set the name of the authenticated user.
     setNameUser: (value) => set({ nameUser: value }),
   };

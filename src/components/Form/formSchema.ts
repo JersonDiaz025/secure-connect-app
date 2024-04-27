@@ -4,7 +4,7 @@ import { AuthData } from "../../interfaces/AuthData";
 // Schema validation form with Yup
 export const validationSchema = yup.object({
   email: yup.string().email("Invalid email").required("Email is required"),
-  firstName: yup.string().required("First name is required"),
+  firstname: yup.string().required("First name is required"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
@@ -17,7 +17,7 @@ export const validationSchema = yup.object({
 // Initial values form defined
 export const initialValues: AuthData = {
   email: "",
-  firstName: "",
+  firstname: "",
   password: "",
   confirmPass: "",
 };

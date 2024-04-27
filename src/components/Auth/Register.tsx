@@ -12,7 +12,7 @@ const Register = () => {
           <Form
             type="register"
             idFieldEmail="email"
-            idFieldFirstname="firstName"
+            idFieldFirstname="firstname"
             idFieldPass="password"
             idFieldConfirmPass="confirmPass"
             placeholderEmail="Email address"

@@ -9,7 +9,7 @@ const Login = () => {
           <Form
             type="login"
             idFieldEmail="email"
-            idFieldFirstname="firstName"
+            idFieldFirstname="firstname"
             idFieldPass="password"
             idFieldConfirmPass="confirmPass"
             placeholderEmail="Email address"

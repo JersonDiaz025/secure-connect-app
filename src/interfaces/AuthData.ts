@@ -1,6 +1,6 @@
 export interface AuthData {
   email: string;
-  firstName?: string | undefined;
+  firstname: string;
   password: string;
   confirmPass: string;
 }

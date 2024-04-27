@@ -52,15 +52,15 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
       )}
       <input
         id={idFieldFirstname}
-        value={formik.values.firstName}
+        value={formik.values.firstname}
         placeholder={placeholderFirstName}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
         type={typeFirstname}
       />
-      {formik.touched.firstName && formik.errors.firstName && (
-        <div className="text-red-500">{formik.errors.firstName}</div>
+      {formik.touched.firstname && formik.errors.firstname && (
+        <div className="text-red-500">{formik.errors.firstname}</div>
       )}
       <input
         id={idFieldPass}

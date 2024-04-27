@@ -1,12 +1,12 @@
-import { AuthData } from "../../interfaces/AuthData";
-import { useNavigate } from "react-router-dom";
-import { TOKEN_USER_KEY } from "../../constants/tokenKey";
-import userStore from "../../store/user";
-import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
-import { SetIsAuthenticated, DataUser } from "../../types/user";
 import { toast } from "react-toastify";
+import userStore from "../../store/user";
+import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../constants/routes";
+import { AuthData } from "../../interfaces/AuthData";
 import { client } from "../../services/kanvasService";
+import { TOKEN_USER_KEY } from "../../constants/tokenKey";
+import { SetIsAuthenticated, DataUser } from "../../types/user";
+import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
 
 /**
  * Authentication form component.
@@ -24,27 +24,24 @@ const useAuthForm = () => {
    * @param values - Registration form values.
    */
   const handleRegisterSubmit = async (values: AuthData) => {
-    const { email, firstName, password, confirmPass } = values;
+    const { email, firstname, password, confirmPass } = values;
     try {
       const dataUser = await client.users.register({
-        email,
-        firstname: firstName,
-        password,
+        email: email,
+        firstname: firstname,
+        password: password,
         password_confirmation: confirmPass,
+        lastname: "",
       });
       // Check if registration was successful
-      if (
-        dataUser &&
-        dataUser.register &&
-        dataUser.register.token &&
-        dataUser.register.user
-      ) {
-        const token = dataUser.register.token.token;
-        const displayname = dataUser.register.user.displayname;
+      const registerData = (dataUser as any).register;
+      if (dataUser && registerData.user) {
+        const token = registerData.token.token;
+        const displayname = registerData.user.displayname;
 
         if (displayname && token) {
           toast.success(
-            `Hello ${displayname} you have successfully logged in.!`,
+            `Hello ${displayname} you have successfully logged in!`,
             {
               position: "top-center",
               autoClose: 5000,
@@ -84,9 +81,10 @@ const useAuthForm = () => {
       const user = await client.auth.login(email, password);
       if (user && user.token) {
         const dataUser: DataUser = {
-          name: values.firstName,
+          name: values.firstname,
           email: values.email,
           token: user.token,
+          firstname: "",
         };
         saveAuthToken(dataUser);
         const infoUser = getAuthToken();
