@@ -8,7 +8,7 @@ const useCheckAuth = () => {
   const setNameUser = userStore((state) => state.setNameUser);
 
   const infoUser = getAuthToken();
-  if (infoUser !== null) {
+  if (infoUser) {
     const parserInfo = JSON.parse(infoUser);
     setNameUser(parserInfo.name);
     console.log(parserInfo);

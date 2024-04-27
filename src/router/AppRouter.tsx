@@ -10,6 +10,7 @@ import useCheckAuth from "../hooks/auth/useInfoUser";
 function App() {
   // Get current state user
   const { isAuthenticated } = useCheckAuth();
+  console.log(isAuthenticated);
 
   return (
     <Router>
