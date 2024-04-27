@@ -88,10 +88,10 @@ const useAuthForm = () => {
         };
         saveAuthToken(dataUser);
         const infoUser = getAuthToken();
-        if (infoUser !== null) {
+        if (infoUser) {
+          setIsAuthenticated(true);
           navigate(AppRoutes.HOME);
-          const parserInfo = JSON.parse(infoUser);
-          setIsAuthenticated(parserInfo.token);
+          //const parserInfo = JSON.parse(infoUser);
         }
       }
       toast.success("Successful login", {
