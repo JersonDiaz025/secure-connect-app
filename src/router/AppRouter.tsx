@@ -18,7 +18,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute
-              canActive={isAuthenticated}
+              canActive={true}
               redirectPath={AppRoutes.LOGIN}
             />
           }
