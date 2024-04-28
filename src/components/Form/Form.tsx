@@ -1,7 +1,7 @@
 import { Button } from "../index";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import { FormItems } from "../../types/FormItems";
+import { FormItems } from "../../types/formItems.type";
 import useAuthForm from "../../hooks/auth/useAuth";
 import { validationSchema, initialValues } from "./formSchema";
 import { AuthData } from "../../interfaces/authData.interface";

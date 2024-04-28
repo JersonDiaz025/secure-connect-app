@@ -1,5 +1,5 @@
 import { TOKEN_USER_KEY } from "../constants/tokenKey";
-import { DataUser } from "../types/user";
+import { DataUser } from "../types/user.type";
 // Function to save token
 export const saveAuthToken = (dataUser: DataUser) => {
   const userDataString = JSON.stringify(dataUser);

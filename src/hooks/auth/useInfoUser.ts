@@ -1,17 +1,17 @@
+import { TOKEN_USER_KEY } from "../../constants/tokenKey";
 import userStore from "../../store/user";
-import { getAuthToken } from "../../utils/tokenHelper";
+import { useLocalstorage } from "../useLocalstorage";
 
 //Hook to verify auth user in app and set name user
 const useCheckAuth = () => {
   const isAuthenticated: boolean = userStore((state) => state.isAuthenticated);
   const setIsAuthenticated = userStore((state) => state.setIsAuthenticated);
   const setNameUser = userStore((state) => state.setNameUser);
+  const [storedValue] = useLocalstorage(TOKEN_USER_KEY, "");
 
-  const infoUser = getAuthToken();
-  if (infoUser) {
-    const parserInfo = JSON.parse(infoUser);
-    setNameUser(parserInfo.name);
-    setIsAuthenticated(parserInfo.token ? true : false);
+  if (storedValue) {
+    setNameUser(storedValue.name);
+    setIsAuthenticated(storedValue?.token && true);
   }
 
   return { isAuthenticated };

@@ -3,10 +3,11 @@ import userStore from "../../store/user";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../constants/routes";
 import { AuthData } from "../../interfaces/authData.interface";
-import { client } from "../../services/kanvasService";
+import { handleClient } from "../../services/kanvasService";
 import { TOKEN_USER_KEY } from "../../constants/tokenKey";
-import { SetIsAuthenticated, DataUser } from "../../types/user";
-import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
+import { SetIsAuthenticated, DataUser } from "../../types/user.type";
+import { useLocalstorage } from "../useLocalstorage";
+//import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
 
 /**
  * Authentication form component.
@@ -14,10 +15,12 @@ import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
  * @returns Functions for handling registration, login, and logout.
  */
 const useAuthForm = () => {
+  const navigate = useNavigate();
   const setIsAuthenticated = userStore(
     (state) => state.setIsAuthenticated
   ) as SetIsAuthenticated;
-  const navigate = useNavigate();
+  const [storedValue, setStoredValue] = useLocalstorage(TOKEN_USER_KEY, "");
+  const client = handleClient(storedValue ? storedValue.token : "");
 
   /**
    * Handles registration form submission.
@@ -86,13 +89,9 @@ const useAuthForm = () => {
           token: user.token,
           firstname: "",
         };
-        saveAuthToken(dataUser);
-        const infoUser = getAuthToken();
-        if (infoUser) {
-          setIsAuthenticated(true);
-          navigate(AppRoutes.HOME);
-          //const parserInfo = JSON.parse(infoUser);
-        }
+        setStoredValue(dataUser);
+        setIsAuthenticated(true);
+        navigate(AppRoutes.HOME);
       }
       toast.success("Successful login", {
         position: "top-center",
