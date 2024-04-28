@@ -5,5 +5,5 @@ export { default as Button } from "./Button/Button";
 export { default as Loader } from "./Loader/Loader";
 export { default as Header } from "./Header/Header";
 export { default as Register } from "./Auth/Register";
-export { default as Profile } from "./Auth/UserProfile";
+export { default as Profile } from "./Profile/UserProfile";
 export { default as Dashboard } from "./Dashboard/Dashboard";

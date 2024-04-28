@@ -1,8 +1,8 @@
-import Title from "../Title/Title";
-import UseGetInfoUser from "../../hooks/useGetInfoUser";
+import { Title } from "../index";
+import useGetInfoUser from "../../hooks/useGetInfoUser";
 
 const Dashboard = () => {
-  const { dataUser } = UseGetInfoUser();
+  const { dataUser } = useGetInfoUser();
 
   return (
     <div className="w-full bg-white p-2 sm:p-7">
