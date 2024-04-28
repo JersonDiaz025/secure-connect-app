@@ -8,6 +8,7 @@ import { TOKEN_USER_KEY } from "../../constants/tokenKey";
 import { SetIsAuthenticated, DataUser } from "../../types/user.type";
 import { useLocalstorage } from "../useLocalstorage";
 import { stateAuth } from "../../store/stateAuth";
+import { CreatedUser } from "@kanvas/core";
 //import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
 
 /**
@@ -40,7 +41,7 @@ const useAuthForm = () => {
         lastname: "",
       });
       // Check if registration was successful
-      const registerData = (dataUser as any).register;
+      const registerData = (dataUser as CreatedUser | any).register;
       if (dataUser && registerData.user) {
         const token = registerData.token.token;
         const displayname = registerData.user.displayname;
@@ -64,6 +65,7 @@ const useAuthForm = () => {
         }
       }
     } catch (error) {
+      setIsLoading(false);
       const errorMsg: string | unknown = (error as Error).message;
       toast.error(`${errorMsg}`, {
         position: "top-center",
@@ -110,6 +112,7 @@ const useAuthForm = () => {
         theme: "light",
       });
     } catch (error) {
+      setIsLoading(false);
       const errorMsg: string | unknown = (error as Error).message;
       toast.error(`${errorMsg}`, {
         position: "top-center",

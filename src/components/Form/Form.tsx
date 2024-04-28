@@ -39,6 +39,9 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
 
   return (
     <form className="flex flex-col" onSubmit={formik.handleSubmit}>
+      {formik.touched.email && formik.errors.email && (
+        <div className="text-red-500">{formik.errors.email}</div>
+      )}
       <input
         id={idFieldEmail}
         value={formik.values.email}
@@ -48,8 +51,8 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
         className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
         type={typeValueEmail}
       />
-      {formik.touched.email && formik.errors.email && (
-        <div className="text-red-500">{formik.errors.email}</div>
+      {formik.touched.firstname && formik.errors.firstname && (
+        <div className="text-red-500">{formik.errors.firstname}</div>
       )}
       <input
         id={idFieldFirstname}
@@ -60,8 +63,8 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
         className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
         type={typeFirstname}
       />
-      {formik.touched.firstname && formik.errors.firstname && (
-        <div className="text-red-500">{formik.errors.firstname}</div>
+      {formik.touched.password && formik.errors.password && (
+        <div className="text-red-500">{formik.errors.password}</div>
       )}
       <input
         id={idFieldPass}
@@ -72,8 +75,8 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
         className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
         type={typePass}
       />
-      {formik.touched.password && formik.errors.password && (
-        <div className="text-red-500">{formik.errors.password}</div>
+      {formik.touched.confirmPass && formik.errors.confirmPass && (
+        <div className="text-red-500">{formik.errors.confirmPass}</div>
       )}
       <input
         id={idFieldConfirmPass}
@@ -84,10 +87,7 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
         className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
         type={typePass}
       />
-      {formik.touched.confirmPass && formik.errors.confirmPass && (
-        <div className="text-red-500">{formik.errors.confirmPass}</div>
-      )}
-      <div className="flex ml-4 mr-4 gap-1 items-center justify-between flex-wrap">
+      <div className="flex ml-1 mr-4 gap-1 items-center justify-between flex-wrap">
         <p className="text-white flex gap-2 mt-4 mr-4">
           {infoText}
           <Link to={actionRoute}>

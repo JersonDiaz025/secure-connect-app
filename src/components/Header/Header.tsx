@@ -18,7 +18,7 @@ const Header = ({ nameUser }: { nameUser: string }): JSX.Element => {
               styles="text-red-500 italic font-extrabold text-xl sm:m-0 sm:mr-0 mr-0 sm:mr-4"
             />
           </Link>
-          <nav className="gap-4 flex rounded px-2 py-1">
+          <nav className="gap-0 sm:gap-4 flex rounded px-2 py-1">
             {menuItems.map(({ label, href, id }: MenuItem) => (
               <Link to={href} key={id}>
                 <span className="underline text-white px-2 py-1 font-semibold">
