@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { AuthData } from "../../interfaces/AuthData";
+import { AuthData } from "../../interfaces/authData.interface";
 
 // Schema validation form with Yup
 export const validationSchema = yup.object({

@@ -1,9 +1,10 @@
+import { Button } from "../index";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { FormItems } from "../../types/FormItems";
-import { validationSchema, initialValues } from "./formSchema";
-import { useFormik } from "formik";
-import { AuthData } from "../../interfaces/AuthData";
 import useAuthForm from "../../hooks/auth/useAuth";
+import { validationSchema, initialValues } from "./formSchema";
+import { AuthData } from "../../interfaces/authData.interface";
 
 const Form = (props: FormItems & { isLogin?: boolean }) => {
   const {
@@ -86,21 +87,22 @@ const Form = (props: FormItems & { isLogin?: boolean }) => {
       {formik.touched.confirmPass && formik.errors.confirmPass && (
         <div className="text-red-500">{formik.errors.confirmPass}</div>
       )}
-      <div className="flex ml-4 mr-4 items-center justify-between flex-wrap">
-        <p className="text-white mt-4 mr-4">
+      <div className="flex ml-4 mr-4 gap-1 items-center justify-between flex-wrap">
+        <p className="text-white flex gap-2 mt-4 mr-4">
           {infoText}
           <Link to={actionRoute}>
-            <span className="text-sm text-blue-500 -200 mt-4">{linkText}</span>
+            <span className="text-sm text-blue-500 underline mt-4">
+              {linkText}
+            </span>
           </Link>
         </p>
       </div>
-      <button
-        className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+      <Button
         type="submit"
+        text={buttonText}
+        styles="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
         disabled={!formik.isValid}
-      >
-        {buttonText}
-      </button>
+      />
     </form>
   );
 };

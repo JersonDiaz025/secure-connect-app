@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import userStore from "../../store/user";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../constants/routes";
-import { AuthData } from "../../interfaces/AuthData";
+import { AuthData } from "../../interfaces/authData.interface";
 import { client } from "../../services/kanvasService";
 import { TOKEN_USER_KEY } from "../../constants/tokenKey";
 import { SetIsAuthenticated, DataUser } from "../../types/user";

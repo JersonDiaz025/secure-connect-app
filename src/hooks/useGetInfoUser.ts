@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { client } from "../services/kanvasService";
-import { UserData } from "../interfaces/AuthData";
+import { UserData } from "../interfaces/authData.interface";
 
 /**
  * Custom hook to fetch user information.

@@ -1,13 +1,12 @@
-//import useUser from "../hooks/auth/useUser";
 import { Navigate, Outlet } from "react-router-dom";
-import { ProtectedRouteProps } from "../interfaces/Routes";
+import useCheckAuth from "../hooks/auth/useInfoUser";
+import { ProtectedRouteProps } from "../interfaces/routes.interface";
 
 // Function to protected routes provateds
-const ProtectedRoute = ({
-  canActive,
-  redirectPath = "/",
-}: ProtectedRouteProps) => {
-  if (!canActive) {
+const ProtectedRoute = ({ redirectPath = "/" }: ProtectedRouteProps) => {
+  // Get current state user
+  const { isAuthenticated } = useCheckAuth();
+  if (!isAuthenticated) {
     return <Navigate to={redirectPath} replace />;
   }
   return <Outlet />;

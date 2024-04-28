@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UserState } from "../interfaces/UserInfo";
+import { UserState } from "../interfaces/userInfo.interface";
 
 // Store for managing user authentication state and user information.
 const userStore = create<UserState>((set) => {

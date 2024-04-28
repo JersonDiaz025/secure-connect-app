@@ -3,4 +3,5 @@ export const enum AppRoutes {
   LOGIN = "/login",
   REGISTER = "/register",
   PROFILE = "/my-profile",
+  UNKNOWN = "*",
 }

@@ -1,9 +1,10 @@
+import { AppRoutes } from "../../constants/routes";
 import { Title, Form } from "../index";
 
 const Register = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen dark">
-      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="w-full max-w-80 sm:max-w-md bg-gray-800 rounded-lg shadow-md p-6">
         <div>
           <Title
             title="Register"
@@ -22,9 +23,9 @@ const Register = () => {
             typeFirstname="text"
             placeholderConfirmPass="Confirm password"
             typePass="password"
-            buttonText="Register"
+            buttonText="Sign up"
             linkText="Sign In"
-            actionRoute="/login"
+            actionRoute={AppRoutes.LOGIN}
             infoText="Already have an account?"
             isLogin={false}
           />
