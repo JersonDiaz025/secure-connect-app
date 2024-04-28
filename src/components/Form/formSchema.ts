@@ -7,7 +7,7 @@ export const validationSchema = yup.object({
   firstname: yup.string().required("First name is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
+    .min(7, "Password must be at least 6 characters")
     .required("Password is required"),
   confirmPass: yup
     .string()
