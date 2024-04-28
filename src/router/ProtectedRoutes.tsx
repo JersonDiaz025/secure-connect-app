@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import useCheckAuth from "../hooks/auth/useInfoUser";
+//import useCheckAuth from "../hooks/auth/useInfoUser";
 import { ProtectedRouteProps } from "../interfaces/routes.interface";
 import { AppRoutes } from "../constants/routes";
 import { TOKEN_USER_KEY } from "../constants/tokenKey";
