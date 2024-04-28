@@ -1,11 +1,12 @@
 import { create } from "zustand";
+import { TOKEN_USER_KEY } from "../constants/tokenKey";
 import { UserState } from "../interfaces/userInfo.interface";
 
 // Store for managing user authentication state and user information.
 const userStore = create<UserState>((set) => {
   return {
     // Flag indicating whether the user is authenticated.
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem(TOKEN_USER_KEY) ? true : false,
 
     //The name of the authenticated user.
     nameUser: "",
