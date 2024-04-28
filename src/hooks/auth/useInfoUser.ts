@@ -9,9 +9,9 @@ const useCheckAuth = () => {
   const setNameUser = userStore((state) => state.setNameUser);
   const [storedValue] = useLocalstorage(TOKEN_USER_KEY, "");
 
-  if (storedValue) {
+  if (storedValue && storedValue.token) {
     setNameUser(storedValue.name);
-    setIsAuthenticated(storedValue?.token && true);
+    setIsAuthenticated(true);
   }
 
   return { isAuthenticated };

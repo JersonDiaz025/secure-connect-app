@@ -7,6 +7,7 @@ import { handleClient } from "../../services/kanvasService";
 import { TOKEN_USER_KEY } from "../../constants/tokenKey";
 import { SetIsAuthenticated, DataUser } from "../../types/user.type";
 import { useLocalstorage } from "../useLocalstorage";
+import { stateAuth } from "../../store/stateAuth";
 //import { getAuthToken, saveAuthToken } from "../../utils/tokenHelper";
 
 /**
@@ -19,6 +20,7 @@ const useAuthForm = () => {
   const setIsAuthenticated = userStore(
     (state) => state.setIsAuthenticated
   ) as SetIsAuthenticated;
+  const setIsLoading = stateAuth((state) => state.setIsLoading);
   const [storedValue, setStoredValue] = useLocalstorage(TOKEN_USER_KEY, "");
   const client = handleClient(storedValue ? storedValue.token : "");
 
@@ -28,6 +30,7 @@ const useAuthForm = () => {
    */
   const handleRegisterSubmit = async (values: AuthData) => {
     const { email, firstname, password, confirmPass } = values;
+    setIsLoading(true);
     try {
       const dataUser = await client.users.register({
         email: email,
@@ -41,6 +44,7 @@ const useAuthForm = () => {
       if (dataUser && registerData.user) {
         const token = registerData.token.token;
         const displayname = registerData.user.displayname;
+        setIsLoading(false);
 
         if (displayname && token) {
           toast.success(
@@ -80,9 +84,11 @@ const useAuthForm = () => {
    */
   const handleLoginSubmit = async (values: AuthData) => {
     const { email, password } = values;
+    setIsLoading(true);
     try {
       const user = await client.auth.login(email, password);
       if (user && user.token) {
+        setIsLoading(false);
         const dataUser: DataUser = {
           name: values.firstname,
           email: values.email,

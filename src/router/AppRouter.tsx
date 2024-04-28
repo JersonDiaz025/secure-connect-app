@@ -1,8 +1,8 @@
 // App.tsx
 import Layout from "./Layout";
-import { Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoutes";
 import { AppRoutes } from "../constants/routes";
+import { Route, Navigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { LoginPage, RegisterPage, DashboardPage, ProfilePage } from "../pages";
 
