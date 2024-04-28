@@ -1,5 +1,5 @@
-import { Dashboard, Title, Loader } from "../components";
 import { stateAuth } from "../store/stateAuth";
+import { Dashboard, Title, Loader } from "../components";
 
 const DashboardPage = () => {
   const isLoading = stateAuth((state) => state.isLoading);
