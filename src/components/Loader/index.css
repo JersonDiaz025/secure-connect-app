@@ -5,35 +5,41 @@
   height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: rgb(31 41 55);
+  background-color: rgb(217, 222, 230);
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  background-color: aqua;
+
+.loader {
+  width: 70px;
+  height: 70px;
   display: grid;
-  place-items: center;
-  animation: zoomin 1.1s infinite alternate-reverse;
-  position: relative;
-}
-
-.inner {
-  background-color: #212121;
-  width: 80%;
-  height: 80%;
+  border: 4.6px solid #0000;
   border-radius: 100%;
+  border-color: #008cff #0000;
+  animation: spinner-e04l1k 1.4s infinite linear;
 }
 
-@keyframes zoomin {
-  0% {
-    transform: scale(2);
-    box-shadow: 0 0 100px 20px rgb(207, 211, 211);
-  }
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 8px;
+  border: inherit;
+  border-radius: 50%;
+}
 
+.loader::before {
+  border-color: #048be6 #0000;
+  animation: inherit;
+  animation-duration: 0.1s;
+}
+
+.loader::after {
+  margin: 2.9px;
+}
+
+@keyframes spinner-e04l1k {
   100% {
-    transform: scale(1.5);
-    box-shadow: 0 0 100px 20px #d35050;
+    transform: rotate(1turn);
   }
 }

@@ -1,5 +1,5 @@
 export const enum AppRoutes {
-  HOME = "/home",
+  HOME = "/dashboard",
   LOGIN = "/login",
   REGISTER = "/register",
   PROFILE = "/my-profile",
